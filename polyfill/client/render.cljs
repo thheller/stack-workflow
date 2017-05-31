@@ -45,14 +45,12 @@
 
 (defn generate-empty-html []
   (html-dsl {:build? false}
-    {:main "http://localhost:8080/main.js"
-     :dev "http://localhost:8080/main-dev.js"}
+    {:main "/js/main.js"
+     :dev "/js/main.js"}
     ""))
 
-(defn -main []
+(defn main [version]
   (spit "dist/index.html"
-    (if (= js/process.env.env "dev")
+    (if (= version "dev")
       (generate-empty-html)
       (generate-html))))
-
-(-main)
